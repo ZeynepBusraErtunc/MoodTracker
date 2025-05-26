@@ -1,42 +1,202 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
 * {
-  box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-a {
-  color: inherit;
+body {
+  font-family: Arial, sans-serif;
+  background-color: transparent; /* Varsayılan arka planı kaldır */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown {
+  display: flex;
+  gap: 10px;
+}
+
+select {
+  padding: 5px;
+  font-size: 16px;
+  border-radius: 10px; /* Kenarları ovalleştir */
+  border: 1px solid #d9d9d9; /* Hafif bir çerçeve ekleyelim */
+}
+
+.logout-btn {
+  padding: 10px 20px;
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  background-color: #d9363e;
+}
+
+.month-title {
+  text-align: center;
+  padding: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background-color: #ddd;
+  padding: 1px;
+  margin: 0 auto;
+  max-width: 800px;
+  transition: filter 0.3s;
+}
+
+.calendar.blur {
+  filter: blur(5px);
+}
+
+.day {
+  background-color: #fff;
+  padding: 20px;
+  text-align: center;
+  min-height: 100px;
+  cursor: pointer;
+}
+
+.day.header {
+  background-color: #f0f2f5;
+  font-weight: bold;
+}
+
+.day.empty {
+  background-color: #f9f9f9;
+  cursor: default;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.popup h3 {
+  margin-bottom: 10px;
+}
+
+.popup label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.popup select,
+.popup textarea {
+  padding: 5px;
+  font-size: 16px;
+}
+
+.popup textarea {
+  height: 100px;
+  resize: none;
+}
+
+.popup button {
+  padding: 10px;
+  background-color: #1890ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup button:hover {
+  background-color: #40a9ff;
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.auth-form {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  width: 400px;
+  max-width: 90%;
+}
+
+.auth-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.auth-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.auth-form input {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+}
+
+.auth-form button {
+  padding: 10px;
+  background-color: #1890ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.auth-form button:hover {
+  background-color: #40a9ff;
+}
+
+.auth-form p {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.auth-form a {
+  color: #1890ff;
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+.auth-form a:hover {
+  text-decoration: underline;
 }

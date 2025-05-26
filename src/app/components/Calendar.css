@@ -1,0 +1,63 @@
+.calendar {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background-color: #ddd;
+  text-align: center;
+}
+
+.calendar .day {
+  height: 80px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.8);
+  min-width: 0;
+}
+
+.calendar .day.header {
+  font-weight: bold;
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #ccc;
+}
+
+.calendar .day.empty {
+  background-color: rgba(255, 255, 255, 0.8); /* Boş gün kutularını beyaz yap */
+  border: 1px solid #ddd; /* Çerçeveyi koru */
+}
+
+.calendar .day:hover:not(.header):not(.empty) {
+  background-color: #e0e0e0;
+  cursor: pointer;
+}
+
+.calendar .day .day-number {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 14px;
+  color: #333;
+  z-index: 2;
+}
+
+.calendar .day .mood-emoji {
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.blur {
+  filter: blur(5px);
+}

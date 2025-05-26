@@ -1,95 +1,56 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { getCurrentUser } from './lib/auth';
+import Header from './components/Header';
+import Calendar from './components/Calendar';
 
 export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const router = useRouter();
+  const user = getCurrentUser();
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+  // Aya göre arka plan rengi belirleme fonksiyonu
+  const getMonthColor = (month) => {
+    const monthColors = [
+      'rgba(135, 206, 235, 0.3)', // Ocak - Gökyüzü mavisi
+      'rgba(176, 224, 230, 0.3)', // Şubat - Toz mavi
+      'rgba(144, 238, 144, 0.3)', // Mart - Açık yeşil
+      'rgba(50, 205, 50, 0.3)',   // Nisan - Yeşil
+      'rgba(255, 182, 193, 0.3)', // Mayıs - Açık pembe
+      'rgba(255, 215, 0, 0.3)',   // Haziran - Altın sarısı
+      'rgba(255, 165, 0, 0.3)',   // Temmuz - Turuncu
+      'rgba(255, 99, 71, 0.3)',   // Ağustos - Mercan
+      'rgba(210, 180, 140, 0.3)', // Eylül - Tan
+      'rgba(255, 140, 0, 0.3)',   // Ekim - Koyu turuncu
+      'rgba(165, 42, 42, 0.3)',   // Kasım - Kahverengi
+      'rgba(192, 192, 192, 0.3)', // Aralık - Gümüş gri
+    ];
+    return monthColors[month - 1];
+  };
+
+  useEffect(() => {
+    if (!user) {
+      router.push('/auth');
+    }
+  }, [user, router]);
+
+  if (!user) return null;
+
+  return (
+    <div style={{ backgroundColor: getMonthColor(selectedMonth), minHeight: '100vh' }}>
+      <Header
+        selectedMonth={selectedMonth}
+        setSelectedMonth={setSelectedMonth}
+        selectedYear={selectedYear}
+        setSelectedYear={setSelectedYear}
+      />
+      <div className="month-title">
+        {new Date(selectedYear, selectedMonth - 1).toLocaleString('tr-TR', { month: 'long', year: 'numeric' })}
+      </div>
+      <Calendar selectedMonth={selectedMonth} selectedYear={selectedYear} />
     </div>
   );
 }
