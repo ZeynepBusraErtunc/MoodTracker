@@ -27,7 +27,6 @@ export default function Home() {
         localStorage.setItem('userId', data.userId);
         router.push('/calendar');
       } else {
-        // "User not found" mesajını Türkçe'ye çevir
         if (data.error === 'User not found') {
           setError('Kullanıcı bulunamadı');
         } else {

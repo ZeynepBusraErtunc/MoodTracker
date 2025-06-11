@@ -56,7 +56,7 @@ export default function Calendar({ month, setMonth, year, setYear, userId }) {
     angry: "rgba(255, 182, 193, 0.5)", // Pastel kırmızı
     calm: "rgba(144, 238, 144, 0.5)",  // Pastel yeşil
     excited: "rgba(255, 215, 0, 0.5)", // Pastel altın
-    tired: "rgba(202, 202, 202, 0.5)"
+    tired: "rgba(202, 202, 202, 0.5)"  // Pastel gri
   };
 
   const getDaysInMonth = (year, month) => {
@@ -65,7 +65,7 @@ export default function Calendar({ month, setMonth, year, setYear, userId }) {
 
   const getStartDayIndex = (year, month) => {
     const firstDay = new Date(year, month, 1);
-    return (firstDay.getDay() + 6) % 7; // Pazartesi=0 yapar
+    return (firstDay.getDay() + 6) % 7; 
   };
 
   const handleDateClick = async (day) => {
@@ -99,7 +99,7 @@ export default function Calendar({ month, setMonth, year, setYear, userId }) {
         }
         return updatedMoods;
       });
-      setSelectedDate(null); // Popup'ı kapat
+      setSelectedDate(null); 
       setMood("");
       setNote("");
     } catch (err) {

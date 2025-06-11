@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Calendar from './components/Calendar';
 
 export default function MoodCalendar() {
-  const [month, setMonth] = useState(new Date().getMonth()); // 0-11 (Haziran = 5)
+  const [month, setMonth] = useState(new Date().getMonth()); 
   const [year, setYear] = useState(new Date().getFullYear());
   const [userId, setUserId] = useState(null);
 
